@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APC 電競 UPS 選購指南</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", sans-serif; background-color: #f4f4f9; color: #333; line-height: 1.6; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #ff6600; text-align: center; border-bottom: 2px solid #ff6600; padding-bottom: 10px; }
+        .product-card { display: flex; border: 1px solid #ddd; margin-bottom: 20px; border-radius: 8px; overflow: hidden; transition: 0.3s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        .product-img { background: #eee; width: 150px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #888; }
+        .product-info { padding: 15px; flex: 1; }
+        .price { color: #e4393c; font-size: 1.25rem; font-weight: bold; }
+        .badge { background: #28a745; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+        .calculator { background: #fff3e6; padding: 20px; border-radius: 8px; margin-top: 30px; border: 1px dashed #ff6600; }
+        button { background: #ff6600; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; font-size: 1rem; }
+        button:hover { background: #e65c00; }
+        #result { margin-top: 15px; font-weight: bold; text-align: center; color: #d32f2f; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>APC 電競系列 UPS 推薦 (PChome)</h1>
+    
+    <div class="product-card">
+        <div class="product-info">
+            <span class="badge">CP值推薦</span>
+            <h3>APC BR1000MS-TW (1000VA/600W)</h3>
+            <p>適用：中階電競機 (RTX 4070 以下)。純正弦波，保護主動式 PFC 電源。</p>
+            <p class="price">網購價約 NT$7,245</p>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <div class="product-info">
+            <span class="badge">頂規推薦</span>
+            <h3>APC BR1500MS-TW (1500VA/900W)</h3>
+            <p>適用：旗艦電競機 (RTX 4080/4090)。提供超長備援時間，支援更多周邊。</p>
+            <p class="price">網購價約 NT$11,550</p>
+        </div>
+    </div>
+
+    <div class="calculator">
+        <h3>⚡ 快速計算：我該買哪一台？</h3>
+        <label>請選擇您的顯卡等級：</label>
+        <select id="gpu" style="width: 100%; padding: 8px; margin: 10px 0;">
+            <option value="200">入門顯卡 (如 RTX 4060) - 約 200W</option>
+            <option value="350" selected>中階顯卡 (如 RTX 4070) - 約 350W</option>
+            <option value="550">高階顯卡 (如 RTX 4080/4090) - 約 550W</option>
+        </select>
+        
+        <label>包含螢幕數量：</label>
+        <input type="number" id="monitor" value="1" min="1" style="width: 95%; padding: 8px; margin: 10px 0;">
+        
+        <button onclick="calculate()">分析推薦型號</button>
+        <div id="result"></div>
+    </div>
+
+    <hr>
+    <p style="font-size: 0.9rem; color: #666;">* 以上價格僅供參考，請以 PChome 24h 實際賣場標價為準。</p>
+</div>
+
+<script>
+    function calculate() {
+        const gpuWatt = parseInt(document.getElementById('gpu').value);
+        const monitorCount = parseInt(document.getElementById('monitor').value);
+        const totalWatt = gpuWatt + (monitorCount * 40) + 50; // 基礎主機瓦數約加50
+        
+        let recommendation = "";
+        if (totalWatt > 600) {
+            recommendation = "您的預估功耗為 " + totalWatt + "W，強烈建議購買【BR1500MS-TW (900W)】以確保安全！";
+        } else if (totalWatt > 450) {
+            recommendation = "您的預估功耗為 " + totalWatt + "W，建議購買【BR1500MS-TW】留點餘裕，或【BR1000MS-TW】勉強夠用。";
+        } else {
+            recommendation = "您的預估功耗為 " + totalWatt + "W，購買【BR1000MS-TW】即可。";
+        }
+        document.getElementById('result').innerText = recommendation;
+    }
+</script>
+
+</body>
+</html>
